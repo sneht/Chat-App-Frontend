@@ -24,7 +24,7 @@ import Chat from "../chat/index";
 import ModalForAddEdit from "../chat/modal";
 
 const Dashboard = () => {
-  const socket = io.connect("http://localhost:4000");
+  const socket = io.connect("https://chat-app-backend-qtdx.onrender.com");
 
   const { fullname } = JSON.parse(localStorage.getItem("data"));
   const [usersList, setUsersList] = useState([]);

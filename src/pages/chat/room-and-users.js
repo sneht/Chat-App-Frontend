@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styles from "./style.module.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

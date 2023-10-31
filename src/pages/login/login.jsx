@@ -9,14 +9,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../service/apiUrl";
+import { CircularProgress } from "@mui/material";
 
 const defaultTheme = createTheme();
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -30,7 +32,9 @@ const Login = () => {
   });
 
   const handleSubmit = async (values) => {
+    setLoading(true);
     const response = await loginUser(values);
+    setLoading(false);
     const { success, data } = response || {};
     const { token } = data || {};
     if (success) {
@@ -96,8 +100,16 @@ const Login = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 1, mb: 2 }}
+              disabled={isLoading}
             >
-              Sign In
+              {isLoading ? (
+                <CircularProgress
+                  color="inherit"
+                  style={{ height: "25px", width: "25px" }}
+                />
+              ) : (
+                "Sign In"
+              )}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

@@ -60,6 +60,24 @@ export const patch = async (url, data) => {
     });
 };
 
+export const remove = async (url) => {
+  const token = localStorage.getItem("token");
+  const headers = {
+    authorization: token,
+  };
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(`${ENDPOINT_URL}${url}`, { headers })
+      .then((res) => {
+        const { data } = res || {};
+        resolve(data);
+      })
+      .catch((err) => {
+        catchReturn(err, resolve);
+      });
+  });
+};
+
 export const catchReturn = (err, resolve) => {
   const { response, code } = err || {};
   const { data, success } = response || {};

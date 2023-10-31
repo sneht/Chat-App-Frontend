@@ -1,7 +1,9 @@
+import { SocketContext } from "../context/socketContext";
 import styles from "./style.module.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
-const SendMessage = ({ socket, username, room }) => {
+const SendMessage = ({ username, room }) => {
+  const { socket } = useContext(SocketContext);
   const [message, setMessage] = useState("");
   const userData = JSON.parse(localStorage.getItem("data"));
 
@@ -35,6 +37,7 @@ const SendMessage = ({ socket, username, room }) => {
           placeholder="Message..."
           onChange={(e) => onChangeHandle(e.target.value)}
           value={message}
+          autoFocus
         />
         <button
           type="submit"

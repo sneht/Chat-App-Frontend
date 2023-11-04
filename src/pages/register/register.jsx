@@ -40,7 +40,7 @@ const Register = () => {
     setLoading(false);
     const { success } = response || {};
     if (success) {
-      navigate("/login");
+      navigate("/");
     }
   };
 

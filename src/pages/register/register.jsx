@@ -9,15 +9,18 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { registerSchema } from "../../utils/validation";
 import { createUser } from "../../service/apiUrl";
 import { Link, useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 const defaultTheme = createTheme();
 
 const Register = () => {
   const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
+
   const formik = useFormik({
     enableReinitialize: true,
     validationSchema: registerSchema,
@@ -32,7 +35,9 @@ const Register = () => {
   });
 
   const handleSubmit = async (values) => {
+    setLoading(true);
     const response = await createUser(values);
+    setLoading(false);
     const { success } = response || {};
     if (success) {
       navigate("/login");
@@ -115,8 +120,16 @@ const Register = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 1, mb: 2 }}
+              disabled={isLoading}
             >
-              Sign Up
+              {isLoading ? (
+                <CircularProgress
+                  color="inherit"
+                  style={{ height: "25px", width: "25px" }}
+                />
+              ) : (
+                "Sign Up"
+              )}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

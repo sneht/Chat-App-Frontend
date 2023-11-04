@@ -1,11 +1,10 @@
-import * as React from "react";
+import { CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import { CircularProgress } from "@mui/material";
-import { useEffect } from "react";
+import * as React from "react";
 
 export const DeleteChatModal = ({
   open,
@@ -13,19 +12,19 @@ export const DeleteChatModal = ({
   handleDeleteMessage,
   isLoading,
 }) => {
-  const [progress, setProgress] = React.useState(0);
+  // const [progress, setProgress] = React.useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) =>
-        prevProgress >= 100 ? 0 : prevProgress + 10
-      );
-    }, 800);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setProgress((prevProgress) =>
+  //       prevProgress >= 100 ? 0 : prevProgress + 10
+  //     );
+  //   }, 800);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
   return (
     <div>

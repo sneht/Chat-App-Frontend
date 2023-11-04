@@ -155,8 +155,8 @@ const Messages = () => {
       setLoading(false);
       const { success, data } = response || {};
       if (success) {
-        socket.emit("join_room", {
-          fullname: userData.fullname,
+        console.log("1")
+        socket.emit("message_deleted_for_everyone", {
           room: data.group,
           userData,
         });
